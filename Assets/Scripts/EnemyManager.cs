@@ -15,7 +15,7 @@ public class EnemyManager : MonoBehaviour
     //NEW
     private float healthMultiplier = 1f;
     private float speedMultiplier = 1f;
-    
+
     //NEW
     private void Awake()
     {
@@ -33,7 +33,7 @@ public class EnemyManager : MonoBehaviour
         if (!WaveManager.Instance.WaveRunning()) return;
         currentTimeBetweenSpawns -= Time.deltaTime;
 
-        if(currentTimeBetweenSpawns <= 0)
+        if (currentTimeBetweenSpawns <= 0)
         {
             SpawnEnemy();
             currentTimeBetweenSpawns = timeBetweenSpawns;
@@ -79,7 +79,7 @@ public class EnemyManager : MonoBehaviour
     {
         healthMultiplier = newHealthMultiplier;
         speedMultiplier = newSpeedMultiplier;
-        
+
     }
     //NEW
 }

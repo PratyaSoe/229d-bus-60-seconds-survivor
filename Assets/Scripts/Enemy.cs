@@ -45,7 +45,7 @@ public class Enemy : MonoBehaviour
             Destroy(gameObject);
         }
     }
-    
+
     //NEW �ѧ��ѹ�ѻവ���ʶҹ��ѵ�ٵ����Ǥٳ������Ѻ
     public void UpdateStats(float healthMultiplier, float speedMultiplier)
     {
