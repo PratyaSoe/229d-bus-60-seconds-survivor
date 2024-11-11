@@ -43,5 +43,12 @@ public class Enemy : MonoBehaviour
     
 
     }
-
+    //NEW ฟังก์ชันอัปเดตค่าสถานะศัตรูตามตัวคูณที่ได้รับ
+    public void UpdateStats(float healthMultiplier, float speedMultiplier)
+    {
+        maxHealth = Mathf.RoundToInt(maxHealth * healthMultiplier);
+        currentHealth = maxHealth; // ตั้งค่า currentHealth ใหม่ให้เท่ากับ maxHealth ที่เพิ่มขึ้น
+        speed *= speedMultiplier;
+    }
+    //NEW
 }

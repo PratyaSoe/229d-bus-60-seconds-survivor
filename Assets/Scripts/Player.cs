@@ -30,8 +30,8 @@ public class Player : MonoBehaviour
     private void Update()
     {
         //Only for testing
-        if(Input.GetKeyDown(KeyCode.Space))
-            Hit(10);
+        //if(Input.GetKeyDown(KeyCode.Space))
+            //Hit(10);
 
 
 
