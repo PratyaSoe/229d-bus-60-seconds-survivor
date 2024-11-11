@@ -8,7 +8,7 @@ public class WaveManager : MonoBehaviour
     [SerializeField] TextMeshProUGUI timeText;
     [SerializeField] TextMeshProUGUI waveText;
 
-    public float timeLimit = 60f; // àÇÅÒ·Õè¡ÓË¹´ãËé
+    public float timeLimit = 60f; // ï¿½ï¿½ï¿½Ò·ï¿½ï¿½ï¿½Ë¹ï¿½ï¿½ï¿½ï¿½
 
     private float timer = 0f;
     public static WaveManager Instance;
@@ -49,8 +49,8 @@ public class WaveManager : MonoBehaviour
         //For testing
         if (Input.GetKeyDown(KeyCode.Space))
             StartNewWave();
-        //NEW µÃÇ¨ÊÍºÇèÒ¤Ãº timeLimit à¾×èÍä» Scene Win ËÅÑ§¨Ò¡¶Ö§ wave ÊØ´·éÒÂ
-        if (timer >= timeLimit && currentWave >= 5) // µÑÇÍÂèÒ§ãËé¨º·Õè wave 5
+        //NEW ï¿½ï¿½Ç¨ï¿½Íºï¿½ï¿½Ò¤Ãº timeLimit ï¿½ï¿½ï¿½ï¿½ï¿½ Scene Win ï¿½ï¿½Ñ§ï¿½Ò¡ï¿½Ö§ wave ï¿½Ø´ï¿½ï¿½ï¿½ï¿½
+        if (timer >= timeLimit && currentWave >= 5) // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ò§ï¿½ï¿½é¨ºï¿½ï¿½ï¿½ wave 5
         {
             SceneManager.LoadScene("Win");
         }
@@ -96,7 +96,7 @@ public class WaveManager : MonoBehaviour
             if (currentWaveTime <= 0)
             {
                 WaveComplete();
-                break; // ÍÍ¡¨Ò¡ loop à¾×èÍËÂØ´ Coroutine ¹Õé
+                break; // ï¿½Í¡ï¿½Ò¡ loop ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ø´ Coroutine ï¿½ï¿½ï¿½
             }
             //if (currentWaveTime <= 0)
             //WaveComplete();
@@ -112,8 +112,8 @@ public class WaveManager : MonoBehaviour
         timeText.text = currentWaveTime.ToString();
         timeText.color = Color.red;
 
-        // àÃÕÂ¡ StartNewWave à¾×èÍàÃÔèÁ wave ¶Ñ´ä» ¶éÒäÁèãªè wave ÊØ´·éÒÂ
-        if (currentWave < 5) // ÊÁÁµÔÇèÒ¨ºà¡ÁàÁ×èÍ¶Ö§ wave 5
+        // ï¿½ï¿½ï¿½Â¡ StartNewWave ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ wave ï¿½Ñ´ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ wave ï¿½Ø´ï¿½ï¿½ï¿½ï¿½
+        if (currentWave < 5) // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ò¨ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Í¶Ö§ wave 5
         {
             StartNewWave();
         }

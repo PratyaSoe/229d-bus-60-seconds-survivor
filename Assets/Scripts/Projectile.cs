@@ -15,7 +15,7 @@ public class Projectile : MonoBehaviour
         if (enemy != null)
         {
             Destroy(gameObject);
-            enemy.Hit(25);
+            enemy.Hit(100);
 
         }
     }
