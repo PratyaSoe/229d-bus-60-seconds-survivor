@@ -5,13 +5,18 @@ using UnityEngine.SceneManagement;
 public class Player : MonoBehaviour
 {
     [SerializeField] TextMeshProUGUI healthText;
+    [SerializeField] TextMeshProUGUI expText; // Text แสดง EXP
+    [SerializeField] TextMeshProUGUI levelText; // Text แสดงระดับเลเวล
     [SerializeField] float moveSpeed = 6;
     Animator anim;
     Rigidbody2D rb;
 
     int maxHealth = 100;
     int currenthealth;
-
+    public int experiencePoints = 0;
+    public int maxExp = 120; // EXP สูงสุดที่ต้องการเพื่อเพิ่มเลเวล
+    public int level = 1; // ระดับเลเวลของผู้เล่น
+    
     bool dead = false;
 
     float moveHorizontal, moveVertical;
@@ -26,7 +31,25 @@ public class Player : MonoBehaviour
         currenthealth = maxHealth;
         healthText.text = maxHealth.ToString();
     }
+    public void AddExp(int amount)
+    {
+        experiencePoints += amount;
+        
+        // ตรวจสอบว่า EXP ถึง maxExp หรือยัง
+        if (experiencePoints >= maxExp)
+        {
+            LevelUp(); // เรียกฟังก์ชันเพิ่มเลเวล
+        }
 
+        //UpdateUI(); // อัปเดต UI ทุกครั้งที่เพิ่ม EXP
+    }
+    void LevelUp()
+    {
+        level++; // เพิ่มระดับเลเวล
+        experiencePoints -= maxExp; // หัก EXP ที่เหลือหลังจากเพิ่มเลเวล
+        maxExp = Mathf.RoundToInt(maxExp * 1.6f); // เพิ่ม maxExp เป็น 120% ของเดิมเพื่อให้การเก็บ EXP ยากขึ้นในเลเวลถัดไป
+        Debug.Log("Level Up! Current Level: " + level);
+    }
     private void Update()
     {
         //Only for testing
@@ -93,6 +116,4 @@ public class Player : MonoBehaviour
         dead = true;
         // Call GameOver
     }
-
-
 }

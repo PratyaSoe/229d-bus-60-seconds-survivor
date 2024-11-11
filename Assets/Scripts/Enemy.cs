@@ -4,6 +4,7 @@ public class Enemy : MonoBehaviour
 {
     [SerializeField] int maxHealth = 100;
     [SerializeField] float speed = 2f;
+    [SerializeField] int expDropAmount = 50;
 
     private int currentHealth;
 
@@ -39,10 +40,12 @@ public class Enemy : MonoBehaviour
         anim.SetTrigger("hit");
 
         if (currentHealth <= 0)
+        {
+            DropExp();
             Destroy(gameObject);
-    
-
+        }
     }
+    
     //NEW �ѧ��ѹ�ѻവ���ʶҹ��ѵ�ٵ����Ǥٳ������Ѻ
     public void UpdateStats(float healthMultiplier, float speedMultiplier)
     {
@@ -51,4 +54,13 @@ public class Enemy : MonoBehaviour
         speed *= speedMultiplier;
     }
     //NEW
+    private void DropExp()
+    {
+        Player player = FindObjectOfType<Player>();
+        if (player != null)
+        {
+            player.AddExp(expDropAmount); // เพิ่ม EXP ให้ผู้เล่น
+            Debug.Log("Player gained " + expDropAmount + " EXP");
+        }
+    }
 }
