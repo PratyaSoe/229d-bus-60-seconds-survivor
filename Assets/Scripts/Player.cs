@@ -30,6 +30,10 @@ public class Player : MonoBehaviour
 
         currenthealth = maxHealth;
         healthText.text = maxHealth.ToString();
+
+        // แสดงค่าเริ่มต้นของ level
+        levelText.text = level.ToString(); // แสดงระดับเลเวลเริ่มต้น
+
     }
     public void AddExp(int amount)
     {
@@ -39,9 +43,10 @@ public class Player : MonoBehaviour
         if (experiencePoints >= maxExp)
         {
             LevelUp(); // เรียกฟังก์ชันเพิ่มเลเวล
+            
+
         }
 
-        //UpdateUI(); // อัปเดต UI ทุกครั้งที่เพิ่ม EXP
     }
     void LevelUp()
     {
@@ -49,6 +54,9 @@ public class Player : MonoBehaviour
         experiencePoints -= maxExp; // หัก EXP ที่เหลือหลังจากเพิ่มเลเวล
         maxExp = Mathf.RoundToInt(maxExp * 1.6f); // เพิ่ม maxExp เป็น 120% ของเดิมเพื่อให้การเก็บ EXP ยากขึ้นในเลเวลถัดไป
         Debug.Log("Level Up! Current Level: " + level);
+
+        // อัปเดตข้อความใน levelText
+        levelText.text = level.ToString();
     }
     private void Update()
     {
