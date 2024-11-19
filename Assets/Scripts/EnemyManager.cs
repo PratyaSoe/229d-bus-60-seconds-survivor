@@ -3,7 +3,7 @@ using UnityEngine;
 public class EnemyManager : MonoBehaviour
 {
     [SerializeField] GameObject enemyPrefab;
-    [SerializeField] float timeBetweenSpawns = 0.5f;
+    [SerializeField] float timeBetweenSpawns = 0.2f;
     float currentTimeBetweenSpawns;
 
 

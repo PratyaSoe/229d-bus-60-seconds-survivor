@@ -7,13 +7,14 @@ public class GunManager : MonoBehaviour
     int AddGunCount = 0;
 
     [SerializeField] GameObject gunPrefab;
+    
 
     Transform player;
     List<Vector2> gunPositions = new List<Vector2>();
 
     int spawnedGuns = 0;
 
-    public float timeLimit = 5f; // เวลาที่กำหนดให้
+    //public float timeLimit = 5f; // เวลาที่กำหนดให้
 
     private float timer = 0f;
     private void Start()
@@ -29,35 +30,37 @@ public class GunManager : MonoBehaviour
         gunPositions.Add(new Vector2(1f, -0.5f));
 
         AddGun();
-        AddGun();
-
+        //AddGun();
+        
     }
     private void Update()
     {
+        
+
         if (!AddGunReceived)
         {
-            timer += Time.deltaTime; // เพิ่มเวลาที่ผ่านไปเรื่อยๆ
+            //timer += Time.deltaTime; // เพิ่มเวลาที่ผ่านไปเรื่อยๆ
 
-            if (timer >= timeLimit)
-            {
-                if (AddGunCount != 4)
-                {
-                    // เมื่อหมดเวลา
-                    AddGun();
-                    AddGunReceived = true; // เปลี่ยนสถานะของการรับไอเท็ม
-                    AddGunCount += 1;
-                    timer = 0f; // รีเซ็ตตัวนับเวลา
-                    AddGunReceived = false;
-                }
-                if (AddGunCount == 4)
-                {
-                    AddGunReceived = false;
-                }
-            }
+            //if (timer >= timeLimit)
+            //{
+            //if (AddGunCount != 4)
+            //{
+            // เมื่อหมดเวลา
+            //AddGun();
+            //AddGunReceived = true; // เปลี่ยนสถานะของการรับไอเท็ม
+            //AddGunCount += 1;
+            //timer = 0f; // รีเซ็ตตัวนับเวลา
+            //AddGunReceived = false;
+            //}
+            //if (AddGunCount == 4)
+            //{
+            //AddGunReceived = false;
+            //}
+            //}
 
         }
-        
-        //  else
+
+        //else
         //   {
         // ผู้เล่นสามารถรับไอเท็มใหม่ได้
         //  if (Input.GetKeyDown(KeyCode.G))
@@ -78,11 +81,14 @@ public class GunManager : MonoBehaviour
 
 
         //For test
-        //  if (Input.GetKeyDown(KeyCode.G))
-        // AddGun();
+        if (Input.GetKeyDown(KeyCode.G))
+            AddGun();
+
+
+
     }
 
-
+    
     void AddGun()
     {
         var pos = gunPositions[spawnedGuns];
