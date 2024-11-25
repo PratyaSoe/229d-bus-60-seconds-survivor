@@ -173,14 +173,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sprite: {fileID: 3125019723844770953}
   speed: 18
-  baseDamage: 100
+  baseDamage: 12
   elementType: 1
   elementalEffect: {fileID: 0}
   burnDuration: 5
-  burnTickDamage: 20
+  burnTickDamage: 10
   freezeDuration: 5
-  slowPercent: 4
+  slowPercent: 5
   chainRange: 4
   maxChainTargets: 3
-  chainDamageReduction: 20
+  chainDamageReduction: 10
   chainLightning: {fileID: 0}

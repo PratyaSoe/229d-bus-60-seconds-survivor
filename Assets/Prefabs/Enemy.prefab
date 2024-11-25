@@ -311,10 +311,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5271c0343ddf41f499498f3b60fc642c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  FloatingTextPrefab: {fileID: 4172682123109620184, guid: 52eb7b91dddbd3746ad1188d1f105e3d, type: 3}
   maxHealth: 100
   speed: 4
   currentMoveSpeed: 0
   expDropAmount: 50
+  currentHealth: 0
 --- !u!95 &4394192958150620281
 Animator:
   serializedVersion: 5

@@ -1,6 +1,6 @@
 using UnityEngine;
 using System.Collections.Generic;
-
+ 
     public enum ElementType
     {
     Fire = 1,    // Mapped to key 1
@@ -8,38 +8,34 @@ using System.Collections.Generic;
     Ice = 3,     // Mapped to key 3
     Electric = 4 // Mapped to key 4
     }
-
+ 
     public class ProjectileGo : MonoBehaviour
     {
     [SerializeField] private SpriteRenderer sprite;
-
+ 
     [Header("Base Stats")]
     [SerializeField] private float speed = 18f;
     [SerializeField] private int baseDamage = 100;
-    
     [Header("Element Settings")]
     [SerializeField] public ElementType elementType = ElementType.Fire;
     [SerializeField] private ParticleSystem elementalEffect;
-    
     [Header("Status Effect Settings")]
     [SerializeField] private float burnDuration = 3f;
     [SerializeField] private float burnTickDamage = 20f;
     [SerializeField] private float freezeDuration = 2f;
     [SerializeField] private float slowPercent = 0.5f;
-    
     [Header("Electric Chain Settings")]
     [SerializeField] private float chainRange = 5f;
     [SerializeField] private int maxChainTargets = 4;
     [SerializeField] private float chainDamageReduction = 0.7f;
     [SerializeField] private LineRenderer chainLightning;
-    
     private List<Enemy> hitEnemies = new List<Enemy>();
-
+ 
     private void Start()
     {
         SetupElementalEffects();
-    } 
-
+    }
+ 
     private void Update()
     {
         SetupElementalEffects();
@@ -53,13 +49,12 @@ using System.Collections.Generic;
                 {
                     elementType = newElement;
                     Debug.Log($"Switched to {elementType} element!");
-                    
                 }
             }
         }
     }
-
-
+ 
+ 
     private void SetupElementalEffects()
     {
         switch (elementType)
@@ -78,12 +73,12 @@ using System.Collections.Generic;
                 break;
         }      
     }
-
+ 
     private void FixedUpdate()
     {
         transform.Translate(Vector2.right * speed * Time.deltaTime);
     }
-
+ 
     private void OnTriggerEnter2D(Collider2D collision)
 {
     Debug.Log($"Collision detected with: {collision.gameObject.name}");
@@ -92,14 +87,13 @@ using System.Collections.Generic;
     {
         Debug.Log($"Enemy found: {enemy.name}");
         ApplyElementalEffect(enemy);
-        
         if (elementType != ElementType.Electric)
         {
             Destroy(gameObject);
         }
     }
 }
-
+ 
     private void ApplyElementalEffect(Enemy primaryTarget)
     {
         switch (elementType)
@@ -118,15 +112,15 @@ using System.Collections.Generic;
                 break;
         }
     }
-
+ 
     private void ApplyFireDamage(Enemy enemy)
     {
         enemy.Hit(baseDamage);
         StartBurning(enemy);
         Debug.Log($"Applied fire damage: {baseDamage} initial + burn effect");
     }
-
-
+ 
+ 
     private void StartBurning(Enemy enemy)
     {
         // Add or refresh burn status effect
@@ -137,7 +131,7 @@ using System.Collections.Generic;
         }
         burn.StartBurn(burnDuration, burnTickDamage);
     }
-
+ 
     private void ApplyWaterDamage(Enemy enemy)
     {
         enemy.Hit(baseDamage);
@@ -149,8 +143,8 @@ using System.Collections.Generic;
         }
         wet.ApplyWet(3f); // Wet for 3 seconds
     }
-
-
+ 
+ 
     private void ApplyIceDamage(Enemy enemy)
     {
         enemy.Hit(baseDamage);
@@ -162,7 +156,7 @@ using System.Collections.Generic;
         freeze.Freeze(freezeDuration, slowPercent);
         Debug.Log($"Applied ice damage: {baseDamage} + {slowPercent * 100}% slow");
     }
-
+ 
     private void ApplyElectricDamage(Enemy primaryTarget)
     {
         hitEnemies.Add(primaryTarget);
@@ -170,16 +164,16 @@ using System.Collections.Generic;
         Debug.Log($"Applied electric damage to primary target: {baseDamage}");
         ChainLightning(primaryTarget.transform.position, baseDamage * chainDamageReduction, maxChainTargets);
     }
-
+ 
     private void ChainLightning(Vector2 sourcePosition, float chainDamage, int remainingChains)
     {
         if (remainingChains <= 0) return;
-
+ 
         // Find all enemies in range
         Collider2D[] colliders = Physics2D.OverlapCircleAll(sourcePosition, chainRange);
         Enemy nearestEnemy = null;
         float nearestDistance = float.MaxValue;
-
+ 
         foreach (Collider2D collider in colliders)
         {
             Enemy enemy = collider.GetComponent<Enemy>();
@@ -193,40 +187,37 @@ using System.Collections.Generic;
                 }
             }
         }
-
+ 
         if (nearestEnemy != null)
         {
             // Visual effect for chain lightning
             DrawChainLightning(sourcePosition, nearestEnemy.transform.position);
-            
             // Apply damage and continue chain
             hitEnemies.Add(nearestEnemy);
             nearestEnemy.Hit(Mathf.RoundToInt(chainDamage));
-            
             // Check if target is wet for bonus damage
             WaterEffect wet = nearestEnemy.GetComponent<WaterEffect>();
             if (wet != null && wet.IsWet)
             {
                 nearestEnemy.Hit(Mathf.RoundToInt(chainDamage * 0.5f)); // 50% bonus damage to wet targets
             }
-
+ 
             ChainLightning(nearestEnemy.transform.position, chainDamage * chainDamageReduction, remainingChains - 1);
         }
     }
-
+ 
     private void DrawChainLightning(Vector2 start, Vector2 end)
     {
         if (chainLightning == null) return;
-
+ 
         chainLightning.positionCount = 2;
         chainLightning.SetPosition(0, start);
         chainLightning.SetPosition(1, end);
-        
         // Create a temporary visual effect
         Destroy(chainLightning.gameObject, 0.1f);
     }
 }
-
+ 
 // Status Effect Components
 public class BurnEffect : MonoBehaviour
 {
@@ -234,7 +225,7 @@ public class BurnEffect : MonoBehaviour
     private float tickDamage;
     private float nextTickTime;
     private float endTime;
-
+ 
     public void StartBurn(float burnDuration, float damage)
     {
         duration = burnDuration;
@@ -242,7 +233,7 @@ public class BurnEffect : MonoBehaviour
         endTime = Time.time + duration;
         nextTickTime = Time.time;
     }
-
+ 
     private void Update()
     {
         if (Time.time > endTime)
@@ -250,7 +241,7 @@ public class BurnEffect : MonoBehaviour
             Destroy(this);
             return;
         }
-
+ 
         if (Time.time >= nextTickTime)
         {
             GetComponent<Enemy>()?.Hit(Mathf.RoundToInt(tickDamage));
@@ -258,18 +249,18 @@ public class BurnEffect : MonoBehaviour
         }
     }
 }
-
+ 
 public class WaterEffect : MonoBehaviour
 {
     public bool IsWet { get; private set; }
     private float wetEndTime;
-
+ 
     public void ApplyWet(float duration)
     {
         IsWet = true;
         wetEndTime = Time.time + duration;
     }
-
+ 
     private void Update()
     {
         if (Time.time > wetEndTime)
@@ -279,18 +270,18 @@ public class WaterEffect : MonoBehaviour
         }
     }
 }
-
+ 
 public class FreezeEffect : MonoBehaviour
 {
     private Enemy enemy;
     private float originalSpeed;
     private float endTime;
-
+ 
     private void Awake()
     {
         enemy = GetComponent<Enemy>();
     }
-
+ 
     public void Freeze(float duration, float slowPercent)
     {
         if (enemy != null)
@@ -300,7 +291,7 @@ public class FreezeEffect : MonoBehaviour
             endTime = Time.time + duration;
         }
     }
-
+ 
     private void Update()
     {
         if (Time.time > endTime)

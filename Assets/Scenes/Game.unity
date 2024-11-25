@@ -1706,7 +1706,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gunPrefab: {fileID: 8210063325485045719, guid: 408aa21ae9d317b4ab2f54e8c259f744, type: 3}
-  timeLimit: 5
 --- !u!1 &966117505
 GameObject:
   m_ObjectHideFlags: 0

@@ -2,6 +2,7 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
+    [SerializeField] public GameObject FloatingTextPrefab;
     [SerializeField] int maxHealth = 200;
     [SerializeField] float speed = 2f;
     [SerializeField] float currentMoveSpeed;
@@ -11,10 +12,12 @@ public class Enemy : MonoBehaviour
     {
         currentMoveSpeed = speed;
     }
+
     private void OnEnable()
     {
         Initialize();
     }
+
     [SerializeField] private int currentHealth;
 
     Animator anim;
@@ -38,16 +41,21 @@ public class Enemy : MonoBehaviour
 
             var playerToTheRight = target.position.x > transform.position.x;
             transform.localScale = new Vector2(playerToTheRight ? -1 : 1, 1);
-
-
         }
     }
 
     public void Hit(int damage)
     {
         currentHealth -= damage;
-        anim.SetTrigger("hit");
+        
+        // Show popup damage
+        if (FloatingTextPrefab != null)
+        {
+            ShowFloatingText(damage);
+        }
 
+        anim.SetTrigger("hit");
+        
         if (currentHealth <= 0)
         {
             DropExp();
@@ -55,24 +63,41 @@ public class Enemy : MonoBehaviour
         }
     }
 
-    //NEW �ѧ��ѹ�ѻവ���ʶҹ��ѵ�ٵ����Ǥٳ������Ѻ
+    private void ShowFloatingText(int damage)
+{
+    // Instantiate the floating text at the enemy's position
+    GameObject floatingText = Instantiate(FloatingTextPrefab, transform.position, Quaternion.identity);
+
+    // Get the TextMesh or TextMeshPro component and set the damage text
+    TextMesh textMesh = floatingText.GetComponent<TextMesh>();
+    if (textMesh != null)
+    {
+        textMesh.text = damage.ToString();
+    }
+
+    // Add fade-out script to the floating text
+    FloatingText floatingTextScript = floatingText.AddComponent<FloatingText>();
+    floatingTextScript.StartFadeOut(1.5f, floatSpeed: 1f); // 1.5 seconds to fade out
+}
+
     public void UpdateStats(float healthMultiplier, float speedMultiplier)
     {
         maxHealth = Mathf.RoundToInt(maxHealth * healthMultiplier);
-        currentHealth = maxHealth; // ��駤�� currentHealth ���������ҡѺ maxHealth ����������
+        currentHealth = maxHealth;
         speed *= speedMultiplier;
     }
-    //NEW
+
     private void DropExp()
     {
         Player player = FindObjectOfType<Player>();
         if (player != null)
         {
-            player.AddExp(expDropAmount); // เพิ่ม EXP ให้ผู้เล่น
+            player.AddExp(expDropAmount);
             Debug.Log("Player gained " + expDropAmount + " EXP");
         }
     }
-     public float GetMoveSpeed()
+
+    public float GetMoveSpeed()
     {
         return currentMoveSpeed;
     }
@@ -80,8 +105,7 @@ public class Enemy : MonoBehaviour
     public void SetMoveSpeed(float newSpeed)
     {
         currentMoveSpeed = Mathf.Max(0, newSpeed);
-        
-        // Update animator speed if available
+
         if (anim != null)
         {
             anim.SetFloat("MoveSpeed", currentMoveSpeed / speed);
@@ -92,14 +116,12 @@ public class Enemy : MonoBehaviour
     {
         SetMoveSpeed(speed);
     }
-    
-    // Called when the enemy is destroyed or disabled
+
     private void OnDisable()
     {
         StopAllCoroutines();
     }
 
-    // Optional: Visualization of hit area in editor
     private void OnDrawGizmosSelected()
     {
         if (TryGetComponent(out Collider2D collider))
@@ -108,7 +130,4 @@ public class Enemy : MonoBehaviour
             Gizmos.DrawWireCube(collider.bounds.center, collider.bounds.size);
         }
     }
-    private SpriteRenderer spriteRenderer;
-    private Color originalColor;
 }
-
