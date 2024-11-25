@@ -55,8 +55,7 @@ public class Player : MonoBehaviour
 
         // อัปเดตข้อความใน levelText
         levelText.text = level.ToString();
-        
-        
+
     }
     private void Update()
     {

@@ -177,10 +177,10 @@ MonoBehaviour:
   elementType: 1
   elementalEffect: {fileID: 0}
   burnDuration: 5
-  burnTickDamage: 10
+  burnTickDamage: 14
   freezeDuration: 5
   slowPercent: 5
-  chainRange: 4
-  maxChainTargets: 3
-  chainDamageReduction: 10
+  chainRange: 3
+  maxChainTargets: 2
+  chainDamageReduction: 1
   chainLightning: {fileID: 0}

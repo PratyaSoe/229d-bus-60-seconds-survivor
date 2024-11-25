@@ -108,7 +108,7 @@ public class Enemy : MonoBehaviour
 
         if (anim != null)
         {
-            anim.SetFloat("MoveSpeed", currentMoveSpeed / speed);
+            anim.SetFloat("MoveSpeed", speed / currentMoveSpeed);
         }
     }
 
