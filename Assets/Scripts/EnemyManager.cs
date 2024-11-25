@@ -10,8 +10,8 @@ public class EnemyManager : MonoBehaviour
     Transform enemiesParent;
 
     public static EnemyManager Instance;
-    // NEW: ตั้งค่ารัศมี (radius) สำหรับการเกิดของศัตรู
-    [SerializeField] float spawnRadius = 35f; // ระยะห่างจากผู้เล่น
+    // NEW: ๏ฟฝ๏ฟฝ้งค๏ฟฝ๏ฟฝ๏ฟฝ๏ฟฝ๏ฟฝ๏ฟฝ๏ฟฝ (radius) ๏ฟฝ๏ฟฝ๏ฟฝ๏ฟฝับ๏ฟฝ๏ฟฝ๏ฟฝ๏ฟฝิด๏ฟฝอง๏ฟฝัต๏ฟฝ๏ฟฝ
+    [SerializeField] float spawnRadius = 35f; // ๏ฟฝ๏ฟฝ๏ฟฝ๏ฟฝ๏ฟฝ๏ฟฝาง๏ฟฝาก๏ฟฝ๏ฟฝ๏ฟฝ๏ฟฝ๏ฟฝ๏ฟฝ
     //NEW
     private float healthMultiplier = 1f;
     private float speedMultiplier = 1f;
@@ -41,13 +41,13 @@ public class EnemyManager : MonoBehaviour
     }
     Vector2 RandomPositionAroundPlayer()
     {
-        // หาตำแหน่งของผู้เล่น
+        // ๏ฟฝาต๏ฟฝ๏ฟฝหน่งของ๏ฟฝ๏ฟฝ๏ฟฝ๏ฟฝ๏ฟฝ๏ฟฝ
         Transform playerTransform = GameObject.Find("Player").transform;
 
-        // สุ่มตำแหน่งในรัศมีรอบๆ ผู้เล่น
-        Vector2 randomDirection = Random.insideUnitCircle.normalized; // ทิศทางสุ่ม
-        float randomDistance = Random.Range(35f, spawnRadius); // ระยะทางสุ่มในรัศมีที่กำหนด
-        Vector2 spawnPosition = (Vector2)playerTransform.position + randomDirection * randomDistance; // คำนวณตำแหน่ง
+        // ๏ฟฝ๏ฟฝ๏ฟฝ๏ฟฝ๏ฟฝ๏ฟฝ๏ฟฝหน๏ฟฝ๏ฟฝ๏ฟฝ๏ฟฝ๏ฟฝ๏ฟฝ๏ฟฝ๏ฟฝอบ๏ฟฝ ๏ฟฝ๏ฟฝ๏ฟฝ๏ฟฝ๏ฟฝ๏ฟฝ
+        Vector2 randomDirection = Random.insideUnitCircle.normalized; // ๏ฟฝ๏ฟฝศทาง๏ฟฝ๏ฟฝ๏ฟฝ๏ฟฝ
+        float randomDistance = Random.Range(35f, spawnRadius); // ๏ฟฝ๏ฟฝ๏ฟฝะทาง๏ฟฝ๏ฟฝ๏ฟฝ๏ฟฝ๏ฟฝ๏ฟฝ๏ฟฝ๏ฟฝ๏ฟฝีท๏ฟฝ๏ฟฝ๏ฟฝหน๏ฟฝ
+        Vector2 spawnPosition = (Vector2)playerTransform.position + randomDirection * randomDistance; // ๏ฟฝำนวณ๏ฟฝ๏ฟฝ๏ฟฝหน๏ฟฝ
 
         return spawnPosition;
     }
@@ -61,7 +61,7 @@ public class EnemyManager : MonoBehaviour
         var e = Instantiate(enemyPrefab, RandomPositionAroundPlayer(), Quaternion.identity);
         e.transform.SetParent(enemiesParent);
 
-        //NEW ปรับค่าสถานะศัตรูตามตัวคูณที่ได้
+        //NEW ๏ฟฝ๏ฟฝับ๏ฟฝ๏ฟฝ๏ฟฝสถาน๏ฟฝ๏ฟฝัต๏ฟฝูต๏ฟฝ๏ฟฝ๏ฟฝ๏ฟฝวคูณ๏ฟฝ๏ฟฝ๏ฟฝ๏ฟฝ๏ฟฝ
         var enemy = e.GetComponent<Enemy>();
         if (enemy != null)
         {
@@ -74,7 +74,7 @@ public class EnemyManager : MonoBehaviour
         foreach (Transform e in enemiesParent)
             Destroy(e.gameObject);
     }
-    //NEW ฟังก์ชันสำหรับอัปเดตตัวคูณความแข็งแกร่งของศัตรู
+    //NEW ๏ฟฝัง๏ฟฝ๏ฟฝัน๏ฟฝ๏ฟฝ๏ฟฝ๏ฟฝับ๏ฟฝัปเดต๏ฟฝ๏ฟฝวคูณ๏ฟฝ๏ฟฝ๏ฟฝ๏ฟฝ๏ฟฝ๏ฟฝ๏ฟฝ๏ฟฝ่งของ๏ฟฝัต๏ฟฝ๏ฟฝ
     public void UpdateEnemyStats(float newHealthMultiplier, float newSpeedMultiplier, float newDamageMultiplier)
     {
         healthMultiplier = newHealthMultiplier;
