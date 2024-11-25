@@ -182,5 +182,6 @@ MonoBehaviour:
   slowPercent: 5
   chainRange: 3
   maxChainTargets: 2
-  chainDamageReduction: 1
+  chainDamageReduction: 0.97
   chainLightning: {fileID: 0}
+  lightningEffectPrefab: {fileID: 1997308249590819450, guid: 169eac792aa2686419c8360db2535792, type: 3}

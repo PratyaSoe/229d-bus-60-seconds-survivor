@@ -30,7 +30,8 @@ using System.Collections.Generic;
     [SerializeField] private float chainDamageReduction = 0.7f;
     [SerializeField] private LineRenderer chainLightning;
     private List<Enemy> hitEnemies = new List<Enemy>();
- 
+    [SerializeField] private GameObject lightningEffectPrefab;
+
     private void Start()
     {
         SetupElementalEffects();
@@ -190,8 +191,17 @@ using System.Collections.Generic;
  
         if (nearestEnemy != null)
         {
-            // Visual effect for chain lightning
+
+            // วาดเส้นสายฟ้า
             DrawChainLightning(sourcePosition, nearestEnemy.transform.position);
+
+            // สร้างเอฟเฟกต์ที่เป้าหมาย
+            CreateDamageEffect(nearestEnemy.transform.position);
+
+            // ทำดาเมจ
+            hitEnemies.Add(nearestEnemy);
+            nearestEnemy.Hit(Mathf.RoundToInt(chainDamage));
+            
             // Apply damage and continue chain
             hitEnemies.Add(nearestEnemy);
             nearestEnemy.Hit(Mathf.RoundToInt(chainDamage));
@@ -204,6 +214,7 @@ using System.Collections.Generic;
  
             ChainLightning(nearestEnemy.transform.position, chainDamage * chainDamageReduction, remainingChains - 1);
         }
+
     }
  
     private void DrawChainLightning(Vector2 start, Vector2 end)
@@ -214,10 +225,37 @@ using System.Collections.Generic;
         chainLightning.SetPosition(0, start);
         chainLightning.SetPosition(1, end);
         // Create a temporary visual effect
-        Destroy(chainLightning.gameObject, 0.1f);
+        //Destroy(chainLightning.gameObject, 0.1f);
+        if (lightningEffectPrefab != null)
+        {
+            GameObject lightningEffect = Instantiate(lightningEffectPrefab, start, Quaternion.identity);
+            LineRenderer lightningLine = lightningEffect.GetComponent<LineRenderer>();
+            if (lightningLine != null)
+            {
+                lightningLine.SetPosition(0, start);
+                lightningLine.SetPosition(1, end);
+            }
+            Destroy(lightningEffect, 0.5f); // Destroy effect after animation
+        }
     }
+
+    private void CreateDamageEffect(Vector2 position)
+    {
+        if (lightningEffectPrefab != null)
+        {
+            GameObject effect = Instantiate(lightningEffectPrefab, position, Quaternion.identity);
+            ParticleSystem particles = effect.GetComponent<ParticleSystem>();
+            if (particles != null)
+            {
+                particles.Play();
+            }
+            Destroy(effect, 0.3f); // ทำลายหลัง  วินาที
+        }
+    }
+
 }
- 
+
+
 // Status Effect Components
 public class BurnEffect : MonoBehaviour
 {
