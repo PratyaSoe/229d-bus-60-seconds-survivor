@@ -2,11 +2,20 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
-    [SerializeField] int maxHealth = 100;
+    [SerializeField] int maxHealth = 200;
     [SerializeField] float speed = 2f;
+    [SerializeField] float currentMoveSpeed;
     [SerializeField] int expDropAmount = 50;
 
-    private int currentHealth;
+    private void Initialize()
+    {
+        currentMoveSpeed = speed;
+    }
+    private void OnEnable()
+    {
+        Initialize();
+    }
+    [SerializeField] private int currentHealth;
 
     Animator anim;
     Transform target;
@@ -63,4 +72,43 @@ public class Enemy : MonoBehaviour
             Debug.Log("Player gained " + expDropAmount + " EXP");
         }
     }
+     public float GetMoveSpeed()
+    {
+        return currentMoveSpeed;
+    }
+
+    public void SetMoveSpeed(float newSpeed)
+    {
+        currentMoveSpeed = Mathf.Max(0, newSpeed);
+        
+        // Update animator speed if available
+        if (anim != null)
+        {
+            anim.SetFloat("MoveSpeed", currentMoveSpeed / speed);
+        }
+    }
+
+    public void ResetMoveSpeed()
+    {
+        SetMoveSpeed(speed);
+    }
+    
+    // Called when the enemy is destroyed or disabled
+    private void OnDisable()
+    {
+        StopAllCoroutines();
+    }
+
+    // Optional: Visualization of hit area in editor
+    private void OnDrawGizmosSelected()
+    {
+        if (TryGetComponent(out Collider2D collider))
+        {
+            Gizmos.color = Color.red;
+            Gizmos.DrawWireCube(collider.bounds.center, collider.bounds.size);
+        }
+    }
+    private SpriteRenderer spriteRenderer;
+    private Color originalColor;
 }
+

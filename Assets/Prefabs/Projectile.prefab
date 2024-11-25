@@ -12,8 +12,7 @@ GameObject:
   - component: {fileID: 3125019723844770953}
   - component: {fileID: 2055863259440141366}
   - component: {fileID: 3194379406546737458}
-  - component: {fileID: 2864581771932230546}
-  - component: {fileID: 1988898570879875285}
+  - component: {fileID: 3122080389425749632}
   m_Layer: 0
   m_Name: Projectile
   m_TagString: Untagged
@@ -78,7 +77,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: -1515644169, guid: be3298ba805e21a4694b1bfc85feaaad, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.99178314, g: 1, b: 0, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -160,7 +159,7 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.88666666, y: 0.93031687}
   m_EdgeRadius: 0
---- !u!114 &2864581771932230546
+--- !u!114 &3122080389425749632
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -172,21 +171,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 916bcd1278a04c648a4b86c6b186c87e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &1988898570879875285
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2593316363973236739}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 52211b476fbef5e4a9fc8803e5d12407, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  sprite: {fileID: 3125019723844770953}
   speed: 18
-  directDamage: 60
-  splashDamage: 30
-  splashRadius: 3
-  maxSharedTargets: 4
-  lightningEffect: {fileID: 0}
+  baseDamage: 100
+  elementType: 1
+  elementalEffect: {fileID: 0}
+  burnDuration: 5
+  burnTickDamage: 20
+  freezeDuration: 5
+  slowPercent: 4
+  chainRange: 4
+  maxChainTargets: 3
+  chainDamageReduction: 20
+  chainLightning: {fileID: 0}

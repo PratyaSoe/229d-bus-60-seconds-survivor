@@ -43,8 +43,6 @@ public class Player : MonoBehaviour
         if (experiencePoints >= maxExp)
         {
             LevelUp(); // เรียกฟังก์ชันเพิ่มเลเวล
-            
-
         }
 
     }
@@ -57,6 +55,8 @@ public class Player : MonoBehaviour
 
         // อัปเดตข้อความใน levelText
         levelText.text = level.ToString();
+        
+        
     }
     private void Update()
     {

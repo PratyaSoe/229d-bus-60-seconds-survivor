@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class GunManager : MonoBehaviour
 {
-    bool AddGunReceived = false; // สถานะของการรับไอเท็ม
+    bool AddGunReceived = false; // สถานะของ๏ฟฝ๏ฟฝ๏ฟฝ๏ฟฝับ๏ฟฝ๏ฟฝ๏ฟฝ๏ฟฝ๏ฟฝ
     int AddGunCount = 0;
 
     [SerializeField] GameObject gunPrefab;
@@ -14,7 +14,7 @@ public class GunManager : MonoBehaviour
 
     int spawnedGuns = 0;
 
-    //public float timeLimit = 5f; // เวลาที่กำหนดให้
+    //public float timeLimit = 5f; // ๏ฟฝ๏ฟฝ๏ฟฝาท๏ฟฝ๏ฟฝ๏ฟฝหน๏ฟฝ๏ฟฝ๏ฟฝ๏ฟฝ
 
     private float timer = 0f;
     private void Start()
@@ -39,17 +39,17 @@ public class GunManager : MonoBehaviour
 
         if (!AddGunReceived)
         {
-            //timer += Time.deltaTime; // เพิ่มเวลาที่ผ่านไปเรื่อยๆ
+            //timer += Time.deltaTime; // ๏ฟฝ๏ฟฝ๏ฟฝ๏ฟฝ๏ฟฝ๏ฟฝ๏ฟฝาท๏ฟฝ๏ฟฝ๏ฟฝาน๏ฟฝ๏ฟฝ๏ฟฝ๏ฟฝ๏ฟฝ๏ฟฝ๏ฟฝ๏ฟฝ
 
             //if (timer >= timeLimit)
             //{
             //if (AddGunCount != 4)
             //{
-            // เมื่อหมดเวลา
+            // ๏ฟฝ๏ฟฝ๏ฟฝ๏ฟฝ๏ฟฝ๏ฟฝ๏ฟฝ๏ฟฝ๏ฟฝ๏ฟฝ๏ฟฝ๏ฟฝ
             //AddGun();
-            //AddGunReceived = true; // เปลี่ยนสถานะของการรับไอเท็ม
+            //AddGunReceived = true; // ๏ฟฝ๏ฟฝ๏ฟฝ๏ฟฝยนสถานะของ๏ฟฝ๏ฟฝ๏ฟฝ๏ฟฝับ๏ฟฝ๏ฟฝ๏ฟฝ๏ฟฝ๏ฟฝ
             //AddGunCount += 1;
-            //timer = 0f; // รีเซ็ตตัวนับเวลา
+            //timer = 0f; // ๏ฟฝ๏ฟฝ๏ฟฝ็ตต๏ฟฝวนับ๏ฟฝ๏ฟฝ๏ฟฝ๏ฟฝ
             //AddGunReceived = false;
             //}
             //if (AddGunCount == 4)
@@ -62,10 +62,10 @@ public class GunManager : MonoBehaviour
 
         //else
         //   {
-        // ผู้เล่นสามารถรับไอเท็มใหม่ได้
+        // ๏ฟฝ๏ฟฝ๏ฟฝ๏ฟฝ๏ฟฝ๏ฟฝ๏ฟฝ๏ฟฝ๏ฟฝ๏ฟฝรถ๏ฟฝับ๏ฟฝ๏ฟฝ๏ฟฝ๏ฟฝ๏ฟฝ๏ฟฝ๏ฟฝ๏ฟฝ๏ฟฝ๏ฟฝ๏ฟฝ
         //  if (Input.GetKeyDown(KeyCode.G))
         //   {
-        //      AddGunReceived = false; // เปลี่ยนสถานะเพื่อให้ผู้เล่นสามารถรับไอเท็มใหม่ได้
+        //      AddGunReceived = false; // ๏ฟฝ๏ฟฝ๏ฟฝ๏ฟฝยนสถาน๏ฟฝ๏ฟฝ๏ฟฝ๏ฟฝ๏ฟฝ๏ฟฝ๏ฟฝ๏ฟฝ๏ฟฝ๏ฟฝ๏ฟฝ๏ฟฝ๏ฟฝ๏ฟฝ๏ฟฝ๏ฟฝ๏ฟฝรถ๏ฟฝับ๏ฟฝ๏ฟฝ๏ฟฝ๏ฟฝ๏ฟฝ๏ฟฝ๏ฟฝ๏ฟฝ๏ฟฝ๏ฟฝ๏ฟฝ
         //  }
         // }
 

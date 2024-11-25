@@ -15,6 +15,7 @@ public class Gun : MonoBehaviour
     Vector2 offset;
 
     private float timeSinceLastShot = 0f;
+    private int elementIndex = 0;
     Transform closestEnemy;
     Animator anim;
 
@@ -34,6 +35,27 @@ public class Gun : MonoBehaviour
         FindClosestEnemy();
         AimAtEnemy();
         Shooting();
+        SelectElement();
+    }
+
+    private void SelectElement()
+    {
+        if (Input.GetKeyDown(KeyCode.Alpha1))
+        {
+            elementIndex = 0;
+        }
+        else if (Input.GetKeyDown(KeyCode.Alpha2))
+        {
+            elementIndex = 1;
+        }
+        else if (Input.GetKeyDown(KeyCode.Alpha3))
+        {
+            elementIndex = 2;
+        }
+        else if (Input.GetKeyDown(KeyCode.Alpha4))
+        {
+            elementIndex = 3;
+        }
     }
 
     void FindClosestEnemy()
@@ -90,8 +112,29 @@ public class Gun : MonoBehaviour
         muzzleGo.transform.SetParent(transform);
         Destroy(muzzleGo, 0.05f);
 
-        var projectileGo = Instantiate(projectile, muzzlePosition.position, transform.rotation);
-        Destroy(projectileGo, 3);
+     var projectileGo = Instantiate(projectile, muzzlePosition.position, transform.rotation);
+
+        switch(elementIndex)
+        {
+            case 0:
+                projectileGo.GetComponent<ProjectileGo>().elementType = ElementType.Fire;
+                break;
+
+            case 1:
+                projectileGo.GetComponent<ProjectileGo>().elementType = ElementType.Water;
+                break;
+
+            case 2:
+                projectileGo.GetComponent<ProjectileGo>().elementType = ElementType.Ice;
+                break;
+
+            case 3:
+                projectileGo.GetComponent<ProjectileGo>().elementType = ElementType.Electric;
+                break;
+        }
+        
+
+     Destroy(projectileGo, 3);
     }
 
 
