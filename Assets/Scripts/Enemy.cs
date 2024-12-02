@@ -7,6 +7,8 @@ public class Enemy : MonoBehaviour
     [SerializeField] float speed = 2f;
     [SerializeField] float currentMoveSpeed;
     [SerializeField] int expDropAmount = 50;
+    [SerializeField] private GameObject healthPickupPrefab; // Prefab ‰Õ‡∑Á¡Œ’≈
+    [SerializeField] private float itemDropChance = 0.2f; // ‚Õ°“ ¥√Õª (20%)
 
     private void Initialize()
     {
@@ -94,6 +96,12 @@ public class Enemy : MonoBehaviour
         {
             player.AddExp(expDropAmount);
             Debug.Log("Player gained " + expDropAmount + " EXP");
+        }
+        //  ÿË¡¥√Õª‰Õ‡∑Á¡Œ’≈
+        if (healthPickupPrefab != null && Random.value <= itemDropChance)
+        {
+            Instantiate(healthPickupPrefab, transform.position, Quaternion.identity);
+            Debug.Log("Dropped Health Pickup!");
         }
     }
 

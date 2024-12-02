@@ -35,6 +35,16 @@ public class Player : MonoBehaviour
         levelText.text = level.ToString(); // แสดงระดับเลเวลเริ่มต้น
 
     }
+    public void Heal(int amount)
+    {
+        if (currenthealth <= 0 || currenthealth == maxHealth)
+            return; // หยุดถ้าตายแล้วหรือ HP เต็มแล้ว
+
+        currenthealth = Mathf.Clamp(currenthealth + amount, 0, maxHealth); // ป้องกัน HP เกิน max
+        healthText.text = currenthealth.ToString(); // อัปเดตข้อความแสดง HP
+        Debug.Log("Healed " + amount + " HP. Current HP: " + currenthealth);
+    }
+
     public void AddExp(int amount)
     {
         experiencePoints += amount;

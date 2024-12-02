@@ -316,6 +316,8 @@ MonoBehaviour:
   speed: 4
   currentMoveSpeed: 0
   expDropAmount: 50
+  healthPickupPrefab: {fileID: 6081126567696858904, guid: e3f2a0599773a46428e30069ef8103a0, type: 3}
+  itemDropChance: 0.2
   currentHealth: 0
 --- !u!95 &4394192958150620281
 Animator:
